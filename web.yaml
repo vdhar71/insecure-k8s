@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web
+  name: web
+  namespace: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      volumes:
+      - name: mongo-secret-volume
+        secret:
+          secretName: mongodb-secret
+      - name: mongo-access
+        configMap:
+          name: mongo-credentials
+      containers:
+      - image: nginx:1.23.3-alpine
+        imagePullPolicy: IfNotPresent
+        name: web
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: mongo-secret-volume
+          readOnly: true
+          mountPath: "/etc/mongo-secret"
+        - name: mongo-access
+          mountPath: "/etc/mongo-conn-str"

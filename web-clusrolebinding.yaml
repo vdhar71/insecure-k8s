@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: allxcessperms
+  namespace: web
+subjects:
+# You can specify more than one "subject"
+- kind: ServiceAccount
+  name: sa # "name" is case sensitive
+  namespace: web
+  apiGroup: 
+roleRef:
+  # "roleRef" specifies the binding to a Role / ClusterRole
+  kind: ClusterRole #this must be Role or ClusterRole
+  name: allaccess # this must match the name of the Role or ClusterRole you wish to bind to
+  apiGroup: rbac.authorization.k8s.io

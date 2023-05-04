@@ -1,0 +1,20 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: eks
+  region: us-west-1
+
+nodeGroups:
+  - name: nodegrp
+    labels: { role: workers }
+    instanceType: t2.micro
+    desiredCapacity: 6
+    volumeSize: 15
+    privateNetworking: true
+    ssh:
+      allow: true # will use ~/.ssh/id_rsa.pub as the default ssh key
+      enableSsm: true
+    iam:
+      withAddonPolicies:
+        imageBuilder: true
