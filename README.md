@@ -7,4 +7,4 @@ Start with creating an EKS Kubernetes:
 ```
 eksctl create cluster -f cluster.yaml
 ```
-NOTE: DO NOT TRY TO CREATE AN EKS CLUSTER IN AN EXISTING VPC. EKS Cloud Formation stackset requires/creates various AWS resources that is impossible to create them in an existing VPC.  
+NOTE: DO NOT TRY TO CREATE AN EKS CLUSTER IN AN EXISTING VPC. EKS Cloud Formation stackset requires/creates various AWS resources that is impossible to create them in an existing VPC.  Refer: (https://eksctl.io/usage/creating-and-managing-clusters/)
